@@ -14,7 +14,7 @@
             padding-top: 100px; /* Space for the fixed header */
         }
 
-        /* Feature 6: Sticky Score and Controls */
+        /* Base Styles (Desktop/Tablet) */
         #header {
             background-color: #004a99;
             color: white;
@@ -33,9 +33,8 @@
         #header h1 {
             margin: 0;
             font-size: 1.8em;
+            flex-shrink: 0;
         }
-        
-        /* Container for Score and Buttons */
         #control-group {
             display: flex;
             align-items: center;
@@ -51,8 +50,6 @@
             min-width: 150px;
             text-align: center;
         }
-
-        /* Styling for new position of control buttons */
         .header-control-btn {
             background-color: #28a745;
             color: white;
@@ -63,15 +60,12 @@
             font-size: 1em;
             transition: background-color 0.3s;
         }
-        .header-control-btn:hover {
-            opacity: 0.9;
-        }
         #reset-btn {
             background-color: #dc3545;
         }
 
 
-        /* Quiz container styles (unchanged) */
+        /* Quiz container styles */
         #quiz-container {
             max-width: 900px;
             margin: 20px auto;
@@ -90,10 +84,6 @@
             color: #004a99;
             margin-bottom: 15px;
         }
-        .options-container {
-            display: flex;
-            flex-direction: column;
-        }
         .option-label {
             display: block;
             background-color: #f9f9f9;
@@ -104,29 +94,9 @@
             cursor: pointer;
             transition: background-color 0.3s, border-color 0.3s;
         }
-        .option-label:hover {
-            background-color: #f0f0f0;
-        }
         .option-label input[type="radio"] {
             margin-right: 10px;
         }
-        
-        /* Feature 2: Green on Correct */
-        .option-label.correct {
-            background-color: #d4edda;
-            border-color: #c3e6cb;
-            color: #155724;
-            font-weight: bold;
-        }
-        /* Feature 3: Red on Incorrect, Green on Correct Answer */
-        .option-label.incorrect {
-            background-color: #f8d7da;
-            border-color: #f5c6cb;
-            color: #721c24;
-            font-weight: bold;
-        }
-
-        /* Feature 7: Confirm Button */
         .confirm-btn {
             background-color: #007bff;
             color: white;
@@ -138,38 +108,69 @@
             margin-top: 10px;
             transition: background-color 0.3s;
         }
-        .confirm-btn:hover {
-            background-color: #0056b3;
-        }
-        .confirm-btn:disabled {
-            background-color: #cccccc;
-            cursor: not-allowed;
-        }
-
-        /* Feature 4: Explanation */
-        .explanation {
-            margin-top: 15px;
-            padding: 15px;
-            background-color: #eef7ff;
-            border: 1px solid #b8d4fe;
-            border-radius: 5px;
-            display: none; /* Hidden by default */
-        }
-        .explanation p {
-            margin: 0;
-            padding: 0;
+        
+        /* Feedback Colors (unchanged, functional) */
+        .option-label.correct {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
             font-weight: bold;
-            color: #0056b3;
         }
-        .explanation .reason {
-            margin-top: 5px;
-            font-style: italic;
-            color: #333;
+        .option-label.incorrect {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+            font-weight: bold;
         }
 
-        /* Removed old #controls styling as buttons are moved */
-        #controls {
-            display: none; /* Hide the old control bar */
+        /* Mobile Optimization (Max-width 768px) */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 150px; /* Increase space for 2-row header */
+            }
+            #header {
+                padding: 10px 15px;
+                flex-direction: column; /* Stack header items vertically */
+                align-items: flex-start; /* Align title/controls to the left */
+                height: 120px; /* Fixed height for 2-row layout */
+            }
+            #header h1 {
+                font-size: 1.3em;
+                margin-bottom: 5px;
+            }
+            #control-group {
+                width: 100%; /* Make control group take full width */
+                justify-content: space-between; /* Space out controls/score */
+                gap: 5px;
+            }
+            #score-container {
+                font-size: 1.1em;
+                padding: 5px 10px;
+                min-width: 100px;
+                order: 1; /* Place score first in the bottom row */
+                flex-grow: 1;
+            }
+            .header-control-btn {
+                font-size: 0.85em;
+                padding: 5px 10px;
+                order: 2; /* Place buttons after score */
+                flex-grow: 1;
+            }
+            #quiz-container {
+                padding: 10px;
+                margin: 10px auto;
+            }
+            .question-block h3 {
+                font-size: 1.1em;
+            }
+            .option-label {
+                padding: 10px;
+                font-size: 0.95em;
+            }
+            .confirm-btn {
+                width: 100%;
+                box-sizing: border-box;
+            }
         }
     </style>
 </head>
@@ -858,7 +859,7 @@
                     "G2C"
                 ],
                 answer: 1,
-                explanation: "เหตุผล: หัวข้อ 8.5.2 (หน้า 172) อธิบาย 'การค้าร่วมกัน (Collaborative commerce)' ว่าเป็นการใช้เทคโนโลยีดิจิตอลมาช่วยในงานเหล่านี้ (การวางแผน, การผลิต, การกระจายสินค้า) 'ร่วมกันได้อย่างใกล้ชิดลูกค้า บริษัทจัดส่งวัตถุดิบ'"
+                explanation: "เหตุผล: หัวข้อ 8.5.2 (หน้า 172) อธิบาย 'การค้าร่วมกัน (Collaborative commerce)' ว่าเป็นการใช้เทคโนโลยีดิจิตอลมาช่วยในงานเหล่านี้ (การวางแผน, การผลิต, การกระจายสินค้า) 'ร่วมกันได้อย่างใกล้ชิดลูกค้าลูกค้า บริษัทจัดส่งวัตถุดิบ'"
             },
 
             // --- บทที่ 9: การพัฒนาระบบสารสนเทศ (20 ข้อ) ---
